@@ -1,3 +1,9 @@
+import Carrusel from "../components/Carrusel";
 export default function Home() {
-  return <h1>home</h1>;
+  return (
+    <>
+      <Carrusel></Carrusel>
+      <h1>home</h1>
+    </>
+  );
 }

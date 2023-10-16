@@ -22,6 +22,7 @@ const pages = [
   { path: "/controles", name: "Controles" },
 
   { path: "/medicamentos", name: "Medicamentos" },
+  { path: "/tips", name: "Tips" },
 ];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
@@ -97,11 +98,11 @@ function Header({ titulo }) {
               }}
             >
               {pages.map((page, index) => (
-                <MenuItem key={index}>
-                  <Typography>
-                    <Link to={page.path}>{page.name}</Link>
-                  </Typography>
-                </MenuItem>
+                <Link to={page.path} key={index}>
+                  <MenuItem>
+                    <Typography>{page.name}</Typography>
+                  </MenuItem>
+                </Link>
               ))}
             </Menu>
           </Box>
@@ -126,12 +127,11 @@ function Header({ titulo }) {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page, index) => (
-              <Button
-                key={index}
-                sx={{ my: 2, color: "white", display: "block" }}
-              >
-                <Link to={page.path}>{page.name}</Link>
-              </Button>
+              <Link to={page.path} key={index}>
+                <Button sx={{ my: 2, color: "white", display: "block" }}>
+                  {page.name}
+                </Button>
+              </Link>
             ))}
           </Box>
 

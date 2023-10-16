@@ -1,45 +1,44 @@
-/*
-import { useState } from "react";
-import { useTheme } from "@mui/material/styles";
+import * as React from "react";
 import Box from "@mui/material/Box";
+import { useTheme } from "@mui/material/styles";
 import MobileStepper from "@mui/material/MobileStepper";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
-import SwipeableViews from "react-swipeable-views";
-import { autoPlay } from "react-swipeable-views-utils";
+import imagencarrusel from "../img/1.jpeg";
+import imagencarrusel2 from "../img/2.jpeg";
+import imagencarrusel3 from "../img/inicio-1.jpg";
 
-const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
-
-const images = [
+const steps = [
   {
-    label: "San Francisco – Oakland Bay Bridge, United States",
-    imgPath:
-      "https://images.unsplash.com/photo-1537944434965-cf4679d1a598?auto=format&fit=crop&w=400&h=250&q=60",
+    label: "Select campaign settings",
+    description: `For each ad campaign that you create, you can control how much
+              you're willing to spend on clicks and conversions, which networks
+              and geographical locations you want your ads to show on, and more.`,
+    imagen: imagencarrusel,
   },
   {
-    label: "Bird",
-    imgPath:
-      "https://images.unsplash.com/photo-1538032746644-0212e812a9e7?auto=format&fit=crop&w=400&h=250&q=60",
+    label: "Create an ad group",
+    description:
+      "An ad group contains one or more ads which target a shared set of keywords.",
+    imagen: imagencarrusel2,
   },
   {
-    label: "Bali, Indonesia",
-    imgPath:
-      "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=400&h=250",
-  },
-  {
-    label: "Goč, Serbia",
-    imgPath:
-      "https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60",
+    label: "Create an ad",
+    description: `Try out different ad text to see what brings in the most customers,
+              and learn how to enhance your ads using features like ad extensions.
+              If you run into any problems with your ads, find out how to tell if
+              they're running and how to resolve approval issues.`,
+    imagen: imagencarrusel3,
   },
 ];
 
-function Carrusel() {
+export default function Carrusel() {
   const theme = useTheme();
-  const [activeStep, setActiveStep] = useState(0);
-  const maxSteps = images.length;
+  const [activeStep, setActiveStep] = React.useState(0);
+  const maxSteps = steps.length;
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -47,10 +46,6 @@ function Carrusel() {
 
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
-
-  const handleStepChange = (step) => {
-    setActiveStep(step);
   };
 
   return (
@@ -66,34 +61,28 @@ function Carrusel() {
           bgcolor: "background.default",
         }}
       >
-        <Typography>{images[activeStep].label}</Typography>
+        <div
+          style={{
+            background: `url(${steps[activeStep].imagen})`,
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "cover",
+            height: "300px ",
+            width: "450px",
+            marginTop: "260px",
+          }}
+        >
+          <Typography>
+            {steps[activeStep].label}
+            {/* <img src={steps[activeStep].imagen} /> */}
+          </Typography>
+        </div>
       </Paper>
-      <AutoPlaySwipeableViews
-        axis={theme.direction === "rtl" ? "x-reverse" : "x"}
-        index={activeStep}
-        onChangeIndex={handleStepChange}
-        enableMouseEvents
-      >
-        {images.map((step, index) => (
-          <div key={step.label}>
-            {Math.abs(activeStep - index) <= 2 ? (
-              <Box
-                component="img"
-                sx={{
-                  height: 255,
-                  display: "block",
-                  maxWidth: 400,
-                  overflow: "hidden",
-                  width: "100%",
-                }}
-                src={step.imgPath}
-                alt={step.label}
-              />
-            ) : null}
-          </div>
-        ))}
-      </AutoPlaySwipeableViews>
+
+      <Box sx={{ height: 255, maxWidth: 400, width: "100%", p: 2 }}>
+        {steps[activeStep].description}
+      </Box>
       <MobileStepper
+        variant="text"
         steps={maxSteps}
         position="static"
         activeStep={activeStep}
@@ -103,7 +92,7 @@ function Carrusel() {
             onClick={handleNext}
             disabled={activeStep === maxSteps - 1}
           >
-            Next
+            Siguiente
             {theme.direction === "rtl" ? (
               <KeyboardArrowLeft />
             ) : (
@@ -118,13 +107,10 @@ function Carrusel() {
             ) : (
               <KeyboardArrowLeft />
             )}
-            Back
+            Atrás
           </Button>
         }
       />
     </Box>
   );
 }
-
-export default Carrusel;
-*/
